@@ -41,32 +41,23 @@ const useGameState = () => {
   const [secondsLeft, setSecondsLeft] = useState(10);
   const [gameStatus, setGameStatus] = useState("active");
   useEffect(() => {
-    if (secondsLeft > 0 && availableNums.length > 0) {
+    if (gameStatus(availableNums) === "active") {
       const timerId = setTimeout(() => setSecondsLeft(secondsLeft - 1), 1000);
-      if (secondsLeft == 1) updateGameStatus(availableNums);
-
       return () => {
         clearTimeout(timerId);
       };
     }
   });
 
-  const updateGameStatus = newAvailableNums => {
-    console.log(newAvailableNums);
-    console.log(
-      secondsLeft <= 1 && newAvailableNums.length !== 0
+  const gameStatus = newAvailableNums => {
+    const newStatus =
+      secondsLeft <= 0 && newAvailableNums.length !== 0
         ? "lost"
         : newAvailableNums.length === 0
         ? "won"
-        : "active"
-    );
-    setGameStatus(
-      secondsLeft <= 1 && newAvailableNums.length !== 0
-        ? "lost"
-        : newAvailableNums.length === 0
-        ? "won"
-        : "active"
-    );
+        : "active";
+    setGameStatus(newStatus);
+    return newStatus;
   };
 
   const getNumberStatus = selectedNum => {
@@ -80,6 +71,7 @@ const useGameState = () => {
   };
 
   const selectNumber = (selectedNum, currentStatus) => {
+    if (gameStatus(availableNums) !== "active") return;
     let newAvailableNums = [];
     let newSelectedNums = [];
     if (currentStatus === "used") return;
@@ -102,8 +94,6 @@ const useGameState = () => {
       setSelectedNums(newSelectedNums);
       setAvailableNums(newAvailableNums);
     }
-
-    if (newAvailableNums.length === 0) updateGameStatus(newAvailableNums);
   };
   return {
     playNumbers,
