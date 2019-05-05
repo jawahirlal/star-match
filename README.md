@@ -9,12 +9,12 @@ The game is implementation of star match game where you have to select sum of nu
 
 The start of the game:
 
-![alt text](https://raw.githubusercontent.com/jawahirlal/star-match/master/game.png?token=ABF4IWNBWNXV2D5RJSMW3GS4Z453U)
+![alt text](game.png)
 
 Game time over:
 
-![alt text](https://raw.githubusercontent.com/jawahirlal/star-match/master/gameover.png?token=ABF4IWLCKRV6ODIQVCU5PFS4Z45K6)
+![alt text](gameover.png)
 
 Game won:
 
-![alt text](https://raw.githubusercontent.com/jawahirlal/star-match/master/gamewon.png?token=ABF4IWJVT5WSCFYLW34GHPK4Z45PK)
+![alt text](gamewon.png)
