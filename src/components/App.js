@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import Game from "../components/Game";
+import { Router, Link } from "@reach/router";
+import Header from "../components/common/header";
+
+let About = () => <div>Star match game react implementation.</div>;
 
 const StarMatch = () => {
   const [gameId, setGameId] = useState(1);
@@ -7,5 +11,14 @@ const StarMatch = () => {
 };
 
 export function App({ initialData }) {
-  return <StarMatch />;
+  return (
+    <div>
+      <Header />
+
+      <Router>
+        <StarMatch path="/" />
+        <About path="about" />
+      </Router>
+    </div>
+  );
 }
