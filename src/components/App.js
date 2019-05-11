@@ -2,6 +2,9 @@ import React, { useState } from "react";
 import Game from "../components/Game";
 import { Router, Link } from "@reach/router";
 import Header from "../components/common/header";
+import configureStore from "../redux/configureStore";
+import { Provider as ReduxProvider } from "react-redux";
+import GameHistory from "../components/GameHistory";
 
 let About = () => <div>Star match game react implementation.</div>;
 
@@ -10,15 +13,19 @@ const StarMatch = () => {
   return <Game key={gameId} startNewGame={() => setGameId(gameId + 1)} />;
 };
 
+const store = configureStore();
+
 export function App({ initialData }) {
   return (
     <div>
       <Header />
-
-      <Router>
-        <StarMatch path="/" />
-        <About path="about" />
-      </Router>
+      <ReduxProvider store={store}>
+        <Router>
+          <StarMatch path="/" />
+          <GameHistory path="game-history" />
+          <About path="about" />
+        </Router>
+      </ReduxProvider>
     </div>
   );
 }

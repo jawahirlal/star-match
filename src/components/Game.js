@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
+
 import { isUnaryLike } from "@babel/types";
 import utils from "../utils";
 import PlayAgain from "../components/PlayAgain";
 import DisplayPayNumbers from "../components/DisplayPlayNumbers";
-import useGameState from "../components/GameState";
+import GameState from "../components/GameState";
 import DisplayStars from "../components/DisplayStars";
 
 //const selectNumber = (num, candidateSet);
@@ -15,8 +16,9 @@ const Game = props => {
     getNumberStatus,
     selectNumber,
     gameStatus,
-    secondsLeft
-  } = useGameState();
+    secondsLeft,
+    availableNums
+  } = GameState(props);
 
   return (
     <div className="game">
@@ -30,6 +32,8 @@ const Game = props => {
           ) : (
             <PlayAgain
               gameStatus={gameStatus}
+              availableNums={availableNums.length}
+              secondsLeft={secondsLeft}
               startNewGame={props.startNewGame}
             />
           )}

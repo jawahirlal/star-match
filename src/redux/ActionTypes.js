@@ -1,0 +1,3 @@
+const GAME_HISTORY = "GAME_HISTORY";
+const CLEAR_STATE = "CLEAR_STATE";
+export default { GAME_HISTORY, CLEAR_STATE };

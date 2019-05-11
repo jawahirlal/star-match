@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { isUnaryLike } from "@babel/types";
+
 import utils from "../utils";
 
-const useGameState = () => {
+function GameState(props) {
   const playNumbers = 9;
   const [stars, setStars] = useState(utils.random(1, playNumbers));
   const [availableNums, setAvailableNums] = useState(
@@ -10,7 +10,7 @@ const useGameState = () => {
   );
   const [selectedNums, setSelectedNums] = useState([]);
 
-  const [secondsLeft, setSecondsLeft] = useState(10);
+  const [secondsLeft, setSecondsLeft] = useState(2);
   const [gameStatus, setGameStatus] = useState("active");
   useEffect(() => {
     if (updateGameStatus(availableNums) === "active") {
@@ -29,6 +29,7 @@ const useGameState = () => {
         ? "won"
         : "active";
     setGameStatus(newStatus);
+
     return newStatus;
   };
 
@@ -73,8 +74,17 @@ const useGameState = () => {
     getNumberStatus,
     selectNumber,
     gameStatus,
-    secondsLeft
+    secondsLeft,
+    availableNums
   };
-};
+}
+// useGameState.propTypes = {
+//   dispatch: propTypes.func.isRequired,
+//   GameHistory: propTypes.array.isRequired
+// };
 
-export default useGameState;
+// const mapStateToProps = state => {
+//   return { GameHistory: state };
+// };
+
+export default GameState;
