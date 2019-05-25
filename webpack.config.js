@@ -8,14 +8,14 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const config = {
   resolve: {
-    modules: [path.resolve("./src"), path.resolve("./node_modules")],
+    modules: [path.resolve("./src"), path.resolve("./node_modules")]
   },
   entry: {
-    main: ["./src/renderers/dom.js"],
+    main: ["./src/renderers/dom.js"]
   },
   output: {
     path: path.resolve("public", "bundles"),
-    filename: isDev ? "[name].js" : "[name].[chunkhash].js",
+    filename: isDev ? "[name].js" : "[name].[chunkhash].js"
   },
   module: {
     rules: [
@@ -23,15 +23,15 @@ const config = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
-        },
+          loader: "babel-loader"
+        }
       },
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
-      },
-    ],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
+      }
+    ]
   },
   optimization: {
     splitChunks: {
@@ -39,20 +39,20 @@ const config = {
         commons: {
           test: /[\\/]node_modules[\\/]/,
           name: "vendor",
-          chunks: "all",
-        },
-      },
-    },
+          chunks: "all"
+        }
+      }
+    }
   },
   plugins: [
     new MiniCssExtractPlugin({
       filename: isDev ? "[name].css" : "[name].[hash].css",
-      chunkFilename: isDev ? "[id].css" : "[id].[hash].css",
+      chunkFilename: isDev ? "[id].css" : "[id].[hash].css"
     }),
     new webpack.HashedModuleIdsPlugin(),
     new WebpackChunkHash(),
     function() {
-      this.plugin("done", (stats) => {
+      this.plugin("done", stats => {
         let gVars = {};
         try {
           gVars = require("./.reactful.json");
@@ -68,8 +68,8 @@ const config = {
           )
         );
       });
-    },
-  ],
+    }
+  ]
 };
 
 module.exports = config;
